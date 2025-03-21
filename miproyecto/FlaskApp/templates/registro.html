@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+</head>
+<body>
+  
+
+    <h2>Registro</h2>
+
+    <!--Mensajes Flash del Backend-->
+    {% for category,message in get_flashed_messages(with_categories=true)%}
+     <p class="success" style="font-family: Verdana, Geneva, Tahoma, sans-serif;
+     font-size: 20px;color: green;">{{message}}</p>
+    {% endfor %}
+
+    <!-- Formulario de registro -->
+    <form method="POST" NOVALIDATE>
+        
+        {{ form.hidden_tag() }}
+
+        <div>
+            {{form.nombre.label}} {{form.nombre()}}
+
+            {% if form.nombre.errors%}
+             {% for error in form.nombre.errors %}
+              <span style="color: red;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: 20px;">
+                {{error}}
+              </span>
+             {% endfor %}
+            {% endif %}
+
+        </div>
+
+        <div>
+            {{form.apellido.label}} {{form.apellido()}}
+            
+            {% if form.apellido.errors %}
+             {% for error in form.apellido.errors %}
+             <span style="color: red;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: 20px;">
+                {{error}}
+             </span>
+             {% endfor %}
+            {% endif %}
+
+        </div>
+
+        <div>
+            {{form.email.label}} {{form.email()}}
+
+            {% if form.email.errors%}
+             {% for error in form.email.errors %}
+              <span style="color: red;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: 20px;">
+                {{error}}
+              </span>
+             {% endfor %}
+            {% endif %}
+
+        </div>
+
+        <div>
+            {{form.contraseña.label}} {{form.contraseña()}}
+            
+            {% if form.contraseña.errors %}
+             {% for error in form.contraseña.errors %}
+             <span style="color: red;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: 20px;">
+                {{error}}
+             </span>
+             {% endfor %}
+            {% endif %}
+            
+        </div>
+
+        <div>
+            {{form.confirmar_contraseña.label}} {{form.confirmar_contraseña()}}
+            
+            {% if form.confirmar_contraseña.errors %}
+             {% for error in form.confirmar_contraseña.errors %}
+             <span style="color: red;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: 20px;">
+                {{error}}
+             </span>
+             {% endfor %}
+            {% endif %}
+            
+        </div>
+
+        <div>
+            {{form.submit()}}
+        </div>
+        
+    </form>
+
+    <a href="{{url_for('login.login')}}">¿Ya tienes una cuenta? Iniciar sesion</a>
+</body>
+</html>

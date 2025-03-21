@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesion</title>
+</head>
+<body>
+    <h2>Iniciar Sesion</h2>
+
+    <style>
+        .danger{
+            color: red;
+            font-weight: bold;
+            font-size: 20px;
+
+        }
+
+        .success{
+            color: green;
+            font-weight: bold;
+            font-size: 20px;
+
+        }
+
+        .info{
+            color: blue;
+            font-weight: bold;
+            font-size: 20px;
+
+        }
+
+        .warning{
+            color: red;
+            font-size: 20px;
+        }
+    </style>
+
+    {% with messages = get_flashed_messages (with_categories= true) %}
+     {% if messages %} 
+        {% for category, message in messages %} 
+         <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+     {% endif %}
+    {% endwith %}
+
+    <form action="" method="POST" novalidate>
+        
+        {{ form.hidden_tag() }}
+
+        <div>
+            {{form.email.label}} <br>
+            {{form.email(size=32)}}
+
+            {% if form.email.errors %}
+             {% for error in form.email.errors %}
+              <span style="color: red;"> {{ error }}</span>
+             {% endfor %}
+            {% endif %}
+
+        </div>
+
+        <div>
+            {{form.contraseña.label}} <br>
+            {{form.contraseña(size=32)}} 
+
+            {% if form.email.errors %}
+             {% for error in form.email.errors %}
+              <span style="color: red;"> {{ error }}</span>
+             {% endfor %}
+            {% endif %}
+        </div>
+
+        <div>
+            {{ form.submit() }}
+        </div>
+
+        
+
+
+
+    </form>
+</body>
+</html>
