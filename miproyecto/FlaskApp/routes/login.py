@@ -1,8 +1,8 @@
-from flask import Blueprint, render_template, url_for, flash, redirect
+from flask import Flask, Blueprint, render_template, url_for, flash, redirect
 from config import app, mysql
 from flask_bcrypt import Bcrypt
 from flask_login import login_user
-from models import Usuario
+from models import Usuario, control_rol
 from formularios.forms import LoginForm
 
 
@@ -29,7 +29,7 @@ def login():
         
         cur = mysql.connection.cursor()
 
-        cur.execute('SELECT id_usuario, nombre, email, contraseña FROM usuarios WHERE email= %s',(email,))
+        cur.execute('SELECT * FROM usuarios WHERE email= %s',(email,))
         usuario = cur.fetchone()
         cur.close()
 
@@ -44,6 +44,8 @@ def login():
             
             '''Inicia Sesion. Estable la sesion del usuario'''
             login_user(user) 
+
+            control_rol()
 
             flash(f"Bienvenido, {usuario['nombre']}!", "success")
            

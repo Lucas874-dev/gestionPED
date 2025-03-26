@@ -30,10 +30,6 @@ def registro():
         apellido = form.apellido.data
         email = form.email.data
         contraseña = form.contraseña.data
-        
-
-        print(f"nombre:{nombre},apellido:{apellido},email:{email},contraseña:{contraseña}")
-
 
         '''En esta variable por medio de la libreria
         brypt incriptamos la  antes de almacenarla

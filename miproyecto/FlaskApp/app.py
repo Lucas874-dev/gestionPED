@@ -25,13 +25,13 @@ usuario en Flask-Login.'''
 @login_manager.user_loader
 def cargar_usuario(user_id):
     cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM usuarios WHERE id_usuario = %s",(user_id))
+    cur.execute("SELECT * FROM usuarios WHERE id_usuario = %s",(user_id,))
     user = cur.fetchone()
     cur.close()
 
     if user:
-        return Usuario(usuario['id_usuario'], usuario['nombre'],
-         usuario['email'],usuario['contraseña'])
+        return Usuario(user['id_usuario'], user['nombre'],
+         user['email'],user['contraseña'])
     return None
 
 
