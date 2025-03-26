@@ -3,8 +3,9 @@ from config import app, login_manager, mysql
 Rutas'''
 from routes.registro import registro_bp  
 from routes.login import login_bp
-from routes.dashboard import dashboard_bp
+from routes.admin import admin_bp
 from routes.logout import logout_bp
+from routes.mesero import mesero_bp
 '''Estructura de los datos del usuario. Esta 
 Estructura utiliza Flask-Login para extraer los datos
 del usuario, segun el ID'''
@@ -16,8 +17,9 @@ manera organizamos las rutas en modulos
 separados y asi mantenemos el codigo mas limpio'''
 app.register_blueprint(registro_bp)
 app.register_blueprint(login_bp)
-app.register_blueprint(dashboard_bp)
+app.register_blueprint(admin_bp)
 app.register_blueprint(logout_bp)
+app.register_blueprint(mesero_bp)
 
 '''Esta fucnion nos permite cargar el
 usuario en Flask-Login.'''
@@ -30,7 +32,7 @@ def cargar_usuario(user_id):
     cur.close()
 
     if user:
-        return Usuario(user['id_usuario'], user['nombre'],
+        return Usuario(user['id_usuario'], user['nombre'],user['telefono'],
          user['email'],user['contraseña'])
     return None
 

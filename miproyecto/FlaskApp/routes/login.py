@@ -39,17 +39,21 @@ def login():
 
         if usuario and bcrypt.check_password_hash(usuario['contraseña'],contraseña):
 
-            user = Usuario (usuario['id_usuario'],usuario['nombre'], usuario['email'],
+            user = Usuario (usuario['id_usuario'],usuario['nombre'],usuario['telefono'],usuario['email'],
             usuario['contraseña'])
             
             '''Inicia Sesion. Estable la sesion del usuario'''
             login_user(user) 
 
-            control_rol()
-
-            flash(f"Bienvenido, {usuario['nombre']}!", "success")
-           
-            return redirect(url_for('dashboard.dashboard'))
+            control =control_rol(usuario['id_usuario'])
+            rol = control.obtener_rol()
+            if rol == 'administrador':
+                flash(f'Bienvenido, {usuario['nombre']}','success')
+                return redirect(url_for('admin.admin'))
+            elif rol == 'mesero' or rol == 'cajero':
+             flash(f'Bienvenidos, {usuario['nombre']}','success')
+             return redirect(url_for('mesero.mesero'))
+        
         else:
             flash("Correo o contraseña incorrectos.", "danger")
 

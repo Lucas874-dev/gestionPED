@@ -6,11 +6,11 @@ from flask_login import login_required
 '''login_requerid nos garantiza que solo los usuarios
 auutenticados pueden acceder a esta ruta'''
 
-dashboard_bp = Blueprint('dashboard', __name__)
-@dashboard_bp.route('/dashboard')
+admin_bp = Blueprint('admin', __name__)
+@admin_bp.route('/admin')
 @login_required 
 
-def dashboard():
+def admin():
     
     from flask import render_template
-    return render_template ('dashboard.html')
+    return render_template ('admin.html')
