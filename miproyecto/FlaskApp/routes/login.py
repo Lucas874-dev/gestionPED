@@ -1,7 +1,7 @@
 from flask import Flask, Blueprint, render_template, url_for, flash, redirect
 from config import app, mysql
 from flask_bcrypt import Bcrypt
-from flask_login import login_user
+from flask_login import login_user, current_user
 from models import Usuario, control_rol
 from formularios.forms import LoginForm
 
@@ -39,19 +39,26 @@ def login():
 
         if usuario and bcrypt.check_password_hash(usuario['contraseña'],contraseña):
 
-            user = Usuario (usuario['id_usuario'],usuario['nombre'],usuario['telefono'],usuario['email'],
+            user = Usuario (usuario['id_usuario'],usuario['nombre'],usuario['apellido']
+            ,usuario['telefono'],usuario['email'],
             usuario['contraseña'])
             
             '''Inicia Sesion. Estable la sesion del usuario'''
             login_user(user) 
+            
+            if current_user.is_authenticated:
+                control= control_rol(current_user.id)
+                roles= control.obtener_roles()
+                print(roles)
+            else:
+                print('Usuario no autenticado...')    
 
-            control =control_rol(usuario['id_usuario'])
-            rol = control.obtener_rol()
-            if rol == 'administrador':
-                flash(f'Bienvenido, {usuario['nombre']}','success')
+            if 'administrador' in roles:
+                flash('Bienvenid@ Pagina del Administrador en contruccion...','success')
                 return redirect(url_for('admin.admin'))
-            elif rol == 'mesero' or rol == 'cajero':
-             flash(f'Bienvenidos, {usuario['nombre']}','success')
+
+            elif 'mesero' in roles or 'cajero' in roles:
+             flash('Pagina para la gestion de pedidos en construccion...','success')
              return redirect(url_for('mesero.mesero'))
         
         else:

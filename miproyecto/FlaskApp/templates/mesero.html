@@ -6,6 +6,14 @@
     <title>Mesero-Gestion de pedidos</title>
 </head>
 <body>
+
+    <style>
+        .success{
+            color: green;
+            font-weight: bold;
+            font-size: 20px;
+        }
+    </style>
     <h2>Panel de pedidos</h2>
     
     {% with messages = get_flashed_messages (with_categories= true) %}
@@ -15,6 +23,15 @@
         {% endfor %}
      {% endif %}
     {% endwith %}
+
+    {% if current_user.is_authenticated %}
+     <p>Bienvenid@ {{current_user.nombre}}</p>
+     {% else%}
+      <a href="{{url_for('login.login')}}">Solo usuarios autenticados</a>
+    {% endif %}
+
+    <a href="{{url_for('logout.logout')}}">Cierre Sesion</a>
+
 
 </body>
 </html>

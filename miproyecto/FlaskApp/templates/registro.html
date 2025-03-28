@@ -61,6 +61,20 @@
         </div>
 
         <div>
+            {{form.telefono.label}} {{form.telefono()}}
+            
+            {% if form.telefono.errors %}
+             {% for error in form.telefono.errors %}
+             <span style="color: red;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: 20px;">
+                {{error}}
+             </span>
+             {% endfor %}
+            {% endif %}
+            
+        </div>
+
+
+        <div>
             {{form.contraseña.label}} {{form.contraseña()}}
             
             {% if form.contraseña.errors %}
@@ -86,19 +100,7 @@
             
         </div>
 
-        <div>
-            {{form.telefono.label}} {{form.telefono()}}
-            
-            {% if form.telefono.errors %}
-             {% for error in form.telefono.errors %}
-             <span style="color: red;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: 20px;">
-                {{error}}
-             </span>
-             {% endfor %}
-            {% endif %}
-            
-        </div>
-
+        
         <div>
             {{form.submit()}}
         </div>

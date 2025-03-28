@@ -16,6 +16,12 @@
      {% endif %}
     {% endwith %}
 
+    {% if current_user.is_authenticated %}
+    <p>Bienvenid@ {{current_user.nombre}}</p>
+    {% else%}
+     <a href="{{url_for('login.login')}}">Solo usuarios autenticados</a>
+   {% endif %}
+
     <a href="{{url_for('logout.logout')}}">Cierre Sesion</a>
 
 

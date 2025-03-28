@@ -12,7 +12,7 @@ class RegistroForm(FlaskForm):
     
     nombre = StringField('Nombre', validators=[DataRequired(message="Rellene este campo."), Length(min=5, max=15, message="Debe tener al menos 5 caracteres")])
     apellido = StringField('Apellido', validators=[DataRequired(message="Rellene este campo."), Length(min=5, max=15,message="Debe tener al menos 5 caracteres")])
-    telefono = StringField('Telefono', validators=[DataRequired(message="Rellene este campo."), Length(min=10,message="Debe tener al menos 5 caracteres")])
+    telefono = StringField('Telefono', validators=[DataRequired(message="Rellene este campo."), Length(min=10,message="Debe tener al menos 10 caracteres")])
     email = StringField('Email', validators=[DataRequired(message="Rellene este campo."), Email(message="Ingrese un Email.")])
     contraseña = PasswordField('Contraseña', validators=[DataRequired(message="Rellene este campo."), Length(min=6,max=20,message="Debe tener al menos 6 caracteres")])
     confirmar_contraseña = PasswordField('Confirmar Contraseña', validators=[DataRequired(message="Rellene este campo."), EqualTo('contraseña',message="No coinciden las contraseñas")])

@@ -1,9 +1,10 @@
 from flask_login import UserMixin
 
 class Usuario(UserMixin):
-    def __init__(self, id, nombre,telefono, email, contraseña):
+    def __init__(self, id, nombre,apellido,email, telefono, contraseña):
         self.id = id
         self.nombre = nombre
+        self.apellido= apellido
         self.email= email
         self.telefono= telefono
         self.contraseña= contraseña
@@ -11,21 +12,22 @@ class Usuario(UserMixin):
 
 class control_rol():
     def __init__(self,user_id):
-      from config import mysql, app 
-      from flask import flash, redirect, url_for
-      cur= mysql.connection.cursor()
+      from config import mysql 
+      import MySQLdb
       
-      cur.execute('''SELECT ur.id_usuario,ur.id_rol,r.nombre as nombre_rol,u.nombre as nombre_usuario FROM usuario_rol as ur 
-      INNER JOIN usuarios as u ON u.id_usuario= ur.id_usuario
+      cur= mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+      
+      cur.execute('''SELECT r.nombre as nombre_rol
+      from usuario_rol as ur
       INNER JOIN roles as r ON ur.id_rol= r.id_rol
-      WHERE ur.id_usuario =%s''',(user_id,))
+      WHERE ur.id_usuario = %s
+      ''',(user_id,))
 
-      self.roles = cur.fetchone()
+      self.roles = cur.fetchall() or []
       cur.close()
 
-    def obtener_rol(self):
+    def obtener_roles(self):
      if self.roles:
-        return self.roles['nombre_rol']
-     return None 
-
+       return[rol['nombre_rol'] for rol in self.roles]
+     return[]
 

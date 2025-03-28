@@ -28,6 +28,7 @@ def registro():
 
         nombre = form.nombre.data
         apellido = form.apellido.data
+        telefono = form.telefono.data
         email = form.email.data
         contraseña = form.contraseña.data
 
