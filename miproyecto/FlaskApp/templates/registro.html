@@ -1,113 +1,101 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Usuario</title>
-</head>
-<body>
+{% extends 'base.html '%}
+{% block title %} Registro de Usuarios {% endblock %}
+
+{%block content %}
+
+<h2 class="text-center fw-bold">Registro de Usuarios</h2>
+
+<!--Mensajes Flash del Backend-->
+{% for category,message in get_flashed_messages(with_categories=true)%}
+ <p class="success" style="font-family: Verdana, Geneva, Tahoma, sans-serif;
+ font-size: 20px;color: green;">{{message}}</p>
+{% endfor %}
+
+<!-- Formulario de registro -->
+<form method="POST" NOVALIDATE class="d-flex flex-column align-items-center">
+    
+    {{ form.hidden_tag() }}
   
+  <div class="w-50">
 
-    <h2>Registro</h2>
+    <div  class="mb-3">
+        {{form.nombre.label(class="form-label")}} {{form.nombre(class="form-control")}}
 
-    <!--Mensajes Flash del Backend-->
-    {% for category,message in get_flashed_messages(with_categories=true)%}
-     <p class="success" style="font-family: Verdana, Geneva, Tahoma, sans-serif;
-     font-size: 20px;color: green;">{{message}}</p>
-    {% endfor %}
+        {% if form.nombre.errors%}
+         {% for error in form.nombre.errors %}
+          <span class="text-danger">{{error}}</span>
+         {% endfor %}
+        {% endif %}
 
-    <!-- Formulario de registro -->
-    <form method="POST" NOVALIDATE>
+    </div>
+
+    <div  class="mb-3">
+        {{form.apellido.label(class="form-label")}} {{form.apellido(class="form-control")}}
+            
+        {% if form.apellido.errors %}
+         {% for error in form.apellido.errors %}
+         <span class="text-danger">{{error}}</span>
+         {% endfor %}
+        {% endif %}
+
+    </div>
+
+    <div  class="mb-3">
+        {{form.email.label(class="form-label")}} {{form.email(class="form-control")}}
+
+        {% if form.email.errors%}
+         {% for error in form.email.errors %}
+         <span class="text-danger">{{error}}</span>
+         {% endfor %}
+        {% endif %}
+
+    </div>
+
+    <div  class="mb-3">
+        {{form.telefono.label(class="form-label")}} {{form.telefono(class="form-control")}}
         
-        {{ form.hidden_tag() }}
-
-        <div>
-            {{form.nombre.label}} {{form.nombre()}}
-
-            {% if form.nombre.errors%}
-             {% for error in form.nombre.errors %}
-              <span style="color: red;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: 20px;">
-                {{error}}
-              </span>
-             {% endfor %}
-            {% endif %}
-
-        </div>
-
-        <div>
-            {{form.apellido.label}} {{form.apellido()}}
-            
-            {% if form.apellido.errors %}
-             {% for error in form.apellido.errors %}
-             <span style="color: red;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: 20px;">
-                {{error}}
-             </span>
-             {% endfor %}
-            {% endif %}
-
-        </div>
-
-        <div>
-            {{form.email.label}} {{form.email()}}
-
-            {% if form.email.errors%}
-             {% for error in form.email.errors %}
-              <span style="color: red;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: 20px;">
-                {{error}}
-              </span>
-             {% endfor %}
-            {% endif %}
-
-        </div>
-
-        <div>
-            {{form.telefono.label}} {{form.telefono()}}
-            
-            {% if form.telefono.errors %}
-             {% for error in form.telefono.errors %}
-             <span style="color: red;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: 20px;">
-                {{error}}
-             </span>
-             {% endfor %}
-            {% endif %}
-            
-        </div>
-
-
-        <div>
-            {{form.contraseña.label}} {{form.contraseña()}}
-            
-            {% if form.contraseña.errors %}
-             {% for error in form.contraseña.errors %}
-             <span style="color: red;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: 20px;">
-                {{error}}
-             </span>
-             {% endfor %}
-            {% endif %}
-            
-        </div>
-
-        <div>
-            {{form.confirmar_contraseña.label}} {{form.confirmar_contraseña()}}
-            
-            {% if form.confirmar_contraseña.errors %}
-             {% for error in form.confirmar_contraseña.errors %}
-             <span style="color: red;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: 20px;">
-                {{error}}
-             </span>
-             {% endfor %}
-            {% endif %}
-            
-        </div>
-
+        {% if form.telefono.errors %}
+         {% for error in form.telefono.errors %}
+         <span class="text-danger">{{error}}</span>
+         {% endfor %}
+        {% endif %}
         
-        <div>
-            {{form.submit()}}
-        </div>
+    </div>
+
+
+    <div class="mb-3">
+        {{form.contraseña.label(class="form-label")}} {{form.contraseña(class="form-control")}}
         
-    </form>
+        {% if form.contraseña.errors %}
+         {% for error in form.contraseña.errors %}
+         <span class="text-danger">{{error}}</span>
+         {% endfor %}
+        {% endif %}
+        
+    </div>
 
-    <a href="{{url_for('login.login')}}">¿Ya tienes una cuenta? Iniciar sesion</a>
+    <div class="mb-3">
+        {{form.confirmar_contraseña.label(class="form-label")}} {{form.confirmar_contraseña(class="form-control")}}
+        
+        {% if form.confirmar_contraseña.errors %}
+         {% for error in form.confirmar_contraseña.errors %}
+         <span class="text-danger">{{error}}</span>
+         {% endfor %}
+        {% endif %}
+        
+    </div>
 
-</body>
-</html>
+    
+    <div class="mb-3 text-center">
+        {{form.submit(class="btn btn-primary w-100")}}
+    </div>
+   </div>
+</form>
+
+<a href="{{url_for('login.login')}}"
+class="d-block text-center mb-3 ">
+¿Ya tienes una cuenta? Iniciar sesion</a>
+
+{% endblock %}
+
+    

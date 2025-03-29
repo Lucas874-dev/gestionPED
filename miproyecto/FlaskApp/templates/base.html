@@ -10,13 +10,15 @@
 
     {% block head %}{% endblock %}
 </head>
-<body>
+<body style="background-color:rgb(245, 225, 200);">
     <!--Header superior-->
     <nav class="navbar bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand text-light" href="#">Al sabor misionero
-            <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-          </a>
+        <div class="container-fluid d-flex justify-content-center align.items-center">
+          <span class="navbar-brand text-light fs-4 fw-bold">Al Sabor Misionero</span>
+            <img src="{{url_for('static',filename='img/logoalsabormisionero.PNG')}}" 
+            alt="Logo" width="50" height="80" 
+            class=" ms-3 d-inline-block align-text-bottom">
+         
         </div>
     </nav>
 

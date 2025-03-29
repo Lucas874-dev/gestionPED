@@ -4,17 +4,18 @@
 
 {% block content %}
  <h1 class="text-center text-primary">Panel de control del Administrador</h1>
+ 
  {% if current_user.is_authenticated %}
   <p class="fs-3 fw-bold">Bienveni@ {{current_user.nombre}} {{current_user.apellido}}</p>
  {% else %}
   <a href="{{url_for('login.login')}}">Inicie Sesion</a>
  {% endif %}
-{% endblock %}
 
-<div class="mt-3">
+ 
+ <div class="mt-3">
     <a href="{{url_for('logout.logout')}}" class="btn btn-secondary">Cerrar Sesion</a>
     <a href="{{url_for('cajero.cajero')}}" class="btn btn-primary">Gestion de Caja</a>
     <a href="{{url_for('mesero.mesero')}}" class="btn btn-info">Gestion de Mesas</a>
     <a href="{{url_for('cocinero.cocinero')}}" class="btn btn-warning">Gestion de Cocina</a>
-
-</div>
+ </div>
+{% endblock %}

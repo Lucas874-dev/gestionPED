@@ -1,81 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesion</title>
-</head>
-<body>
-    <h2>Iniciar Sesion</h2>
+{% extends 'base.html' %}
 
-    <style>
-        .danger{
-            color: red;
-            font-weight: bold;
-            font-size: 20px;
+{% block title %}Inicio de Sesion de Usuarios Registrados{% endblock %}
 
-        }
+{% block content %} 
+<h1>Iniciar Sesion</h1>
 
-        .success{
-            color: green;
-            font-weight: bold;
-            font-size: 20px;
+<form action="" method="POST" novalidate>
+    
+    {{ form.hidden_tag() }}
 
-        }
+    <div class="">
+        {{form.email.label}} <br>
+        {{form.email(size=32)}}
 
-        .info{
-            color: blue;
-            font-weight: bold;
-            font-size: 20px;
+        {% if form.email.errors %}
+         {% for error in form.email.errors %}
+          <span class="text-danger"> {{ error }}</span>
+         {% endfor %}
+        {% endif %}
 
-        }
+    </div>
 
-        .warning{
-            color: red;
-            font-size: 20px;
-        }
-    </style>
+    <div class="mb-3">
+        {{form.contraseña.label}} <br>
+        {{form.contraseña(size=32)}} 
 
-    {% with messages = get_flashed_messages (with_categories= true) %}
-     {% if messages %} 
-        {% for category, message in messages %} 
-         <p class="{{ category }}">{{ message }}</p>
-        {% endfor %}
-     {% endif %}
-    {% endwith %}
+        {% if form.email.errors %}
+         {% for error in form.email.errors %}
+          <span class="text-danger"> {{ error }}</span>
+         {% endfor %}
+        {% endif %}
+    </div>
 
-    <form action="" method="POST" novalidate>
-        
-        {{ form.hidden_tag() }}
+    <div>
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+<a href="{{url_for('registro.registro')}}">¿No tienes un cuenta? Registrate!!</a>
 
-        <div>
-            {{form.email.label}} <br>
-            {{form.email(size=32)}}
 
-            {% if form.email.errors %}
-             {% for error in form.email.errors %}
-              <span style="color: red;"> {{ error }}</span>
-             {% endfor %}
-            {% endif %}
-
-        </div>
-
-        <div>
-            {{form.contraseña.label}} <br>
-            {{form.contraseña(size=32)}} 
-
-            {% if form.email.errors %}
-             {% for error in form.email.errors %}
-              <span style="color: red;"> {{ error }}</span>
-             {% endfor %}
-            {% endif %}
-        </div>
-
-        <div>
-            {{ form.submit() }}
-        </div>
-    </form>
-    <a href="{{url_for('registro.registro')}}">¿No tienes un cuenta? Registrate!!</a>
-
-</body>
-</html>
+{% endblock %}
+    
+    
