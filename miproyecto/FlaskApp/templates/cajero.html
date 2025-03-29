@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesero-Gestion de pedidos</title>
+    <title>Cajero-Gestion de pedidos</title>
 </head>
 <body>
 
@@ -14,7 +14,7 @@
             font-size: 20px;
         }
     </style>
-    <h2>Panel de control de Pedidos- Mesero</h2>
+    <h2>Panel de control de Cajero</h2>
     
     {% with messages = get_flashed_messages (with_categories= true) %}
      {% if messages %} 
@@ -32,8 +32,7 @@
 
     <a href="{{url_for('logout.logout')}}">Cierre Sesion</a>
 
-    <a href="{{url_for('cajero.cajero')}}">Gestion de facturas</a>
-
+    <a href="{{url_for('mesero.mesero')}}">Gestion de pedidos</a>
 
 
 </body>

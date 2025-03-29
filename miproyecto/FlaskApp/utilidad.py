@@ -9,12 +9,10 @@ def requiere_rol(roles_permitidos):
         @wraps(f)
         def etiqueta(*args,**kwargs):
             if current_user.is_authenticated:
-                control= control_rol(current_user.id)
-                roles_usuario= control.obtener_roles()
-
-                if any (rol in roles_permitidos for rol in roles_usuario):
-                    return f(*args,**kwargs)
-               
+             control= control_rol(current_user.id)
+             roles_usuario= control.obtener_roles()
+             if any (rol in roles_permitidos for rol in roles_usuario):
+              return f(*args,**kwargs)
             flash('Acesso no permitido: No tienes permisos suficientes.','warning')
             return redirect(url_for('login.login'))
         return etiqueta

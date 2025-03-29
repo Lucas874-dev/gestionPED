@@ -53,13 +53,26 @@ def login():
             else:
                 print('Usuario no autenticado...')    
 
-            if 'administrador' in roles:
-                flash('Bienvenid@ Pagina del Administrador en contruccion...','success')
-                return redirect(url_for('admin.admin'))
 
-            elif 'mesero' in roles or 'cajero' in roles:
+            if 'cajero' in roles and 'mesero' in roles:
              flash('Pagina para la gestion de pedidos en construccion...','success')
              return redirect(url_for('mesero.mesero'))
+
+            elif 'administrador' in roles:
+             flash('Bienvenid@ Pagina del Administrador en contruccion...','success')
+             return redirect(url_for('admin.admin'))
+
+            elif 'mesero' in roles:
+             flash('Pagina para la gestion de pedidos en construccion...','success')
+             return redirect(url_for('mesero.mesero'))
+
+            elif 'cajero' in roles:
+             flash('Pagina para la gestion de pedidos y facturacion en construccion...','success')
+             return redirect(url_for('cajero.cajero'))
+
+            elif 'cocinero' in roles:
+             flash('Pagina para la gestion en la cocina en construccion...','success')
+             return redirect(url_for('cocinero.cocinero'))
         
         else:
             flash("Correo o contraseña incorrectos.", "danger")
